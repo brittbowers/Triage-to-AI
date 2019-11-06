@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type=text/javascript>
+      $(function() {
+        $('a#days').bind('click', function() {
+          $.getJSON('/background_process', {
+            days: $('input[name="days"]').val(),
+  				    }, function(data) {
+  				  $("#result").text(data.result);
+          });
+          return false
+        });
+      });
+      $(function(){
+        $('a#patients_day').bind('click', function() {
+          $.getJSON('/background_process', {
+            patients_day: $('input[name="patients_day"]').val()
+  				    }, function(data) {
+  				  $("#result").text(data.result);
+          });
+        return false;
+      });
+    });
+		</script>
+  </head>
+  <body>
+    {% extends "index.html" %}
+    {% block content %}
+<div class = "statistics">
+  <div class = "title">
+  <p><big>Time Lost per Manual Triage Score Assessment</big></p>
+</div>
+<div class = "form_days">
+  <form>
+  <table>
+    <tr>
+      <td>
+    <label class = "stats" for="days">Days</label>
+  </td>
+  <td>
+    <label class = "stats" for = "patients_day">Patients per Day</label>
+  </td>
+  <tr>
+    <td>
+    <input type=text size=5 name="days">
+  </td>
+    <td>
+    <input type=text size=5 name="patients_day">
+  </td>
+  <td>
+    <a href=# id=patients_day><button class='btn btn-default'>Submit</button></a>
+  </td>
+</tr>
+</table>
+  </form>
+</div>
+<div class = "result"
+  <p id = result>
+  </p>
+  <p>
+    <br>
+    {{ result }} Minutes
+  </p>
+</div>
+</div>
+    {% endblock %}
+  </body>
+</html>

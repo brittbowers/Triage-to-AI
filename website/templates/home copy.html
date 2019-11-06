@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type=text/javascript>
+      $("button").click(function() {
+        var fired_button = $(this).attr("value");
+          return fired_button;
+        });
+		</script>
+  </head>
+  <body>
+    {% extends "index.html" %}
+    {% block content %}
+
+    <p><big>Time Spent Assesing Triage Score</big></p>
+
+  <form>
+    <a href=# id=by_day><button type = "button" class='btn btn-default' value = "by_day">By Day</button></a>
+    <a href=# id=by_month><button type = "button" class='btn btn-default' value = "by_month">By Month</button></a>
+    <a href=# id=by_year><button type = "button" class='btn btn-default' value = "by_year">By Year</button></a>
+    <a href=# id=city><button type = "button" class='btn btn-default' value = "city">City</button></a>
+  </form>
+  <p id = result>
+    Something
+  </p>
+  <p>
+    <br>
+    {{ triage_time }} Minutes
+  </p>
+
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Predictor Page</title>
+<body>
+    {% extends "index.html" %}
+    {% block content %}
+<div class = 'all'>
+  <div class = "pred_title"
+  <p>Enter Patient Vitals</p>
+  </div>
+
+<form action="/predictor" method="POST">
+    <div class="form-group">
+      <table>
+        <tr>
+          <div class = 'tab_head'>
+          <td style = "font-size:20px">Basic Questionaire</td>
+          <td style = "font-size:20px">Patient Vitals</td>
+          <td style = "font-size:20px">Triage Score?</td>
+          </div>
+        </tr>
+        <tr>
+          <td>
+            <label class="sr-only" for="sex">Sex</label>
+            <select class="form-control" name = "sex" id="sex">
+                <option value = "none">Gender</option>
+                <option value = "male">Male</option>
+                <option value = "fem">Female</option>
+            </select>
+          </td>
+          <td>
+            <label class = "sr-only" for= "sbp">Systolic BP (mmHg)</label>
+            <select class= "form-control" name = "sbp" id="sbp">
+              <option>Systolic BP (mmHg)</option>
+              <option value = "low">Low (Below 90)</option>
+              <option value = "norm">Normal (90 - 130)</option>
+              <option value = "high">High (Over 130)</option>
+            </select>
+          </td>
+          <td colspan="5">
+            <select class= "form-control" name = "triage" id="triage">
+              <option>Triage Score (1-5)</option>
+              <option value = "1">1</option>
+              <option value = "2">2</option>
+              <option value = "3">3</option>
+              <option value = "4">4</option>
+              <option value = "5">5</option>
+            </select>
+        </td>
+        </tr>
+        <tr>
+          <td>
+            <label class = "sr-only" for= "Age">Age (Years)</label>
+            <select class= "form-control" name = "age" id="age">
+              <option>Patient Age</option>
+              <option value = "young">Young (Under 42)</option>
+              <option value = "mid_age">Middle Age (42 - 70)</option>
+              <option value = "old">Elderly (Over 70)</option>
+            </select>
+          </td>
+          <td>
+            <label class = "sr-only" for= "dbp">Diastolic BP (mmHg)</label>
+            <select class= "form-control" name = "dbp" id="dbp">
+              <option> Diastolic BP (mmHg)</option>
+              <option value = "low">Low (Below 60)</option>
+              <option value = "norm">Normal (60 - 80)</option>
+              <option value = "high">High (Over 80)</option>
+            </select>
+          <td>
+        </tr>
+        <tr>
+          <td>
+            <label class = "sr-only" for= "alert">Alert?</label>
+            <select class= "form-control" name = "alert" id="alert">
+              <option value = "none">Is the patient alert?</option>
+              <option value = "yes">Yes</option>
+              <option value = "no">No</option>
+            </select>
+          </td>
+          <td>
+            <label class = "sr-only" for= "hr">Heart Rate (bpm)</label>
+            <select class= "form-control" name = "hr" id="hr">
+              <option>Heart Rate (bpm)</option>
+              <option value = "low">Low (Below 70)</option>
+              <option value = "low">Normal (70 - 110)</option>
+              <option value = "low">High (Above 110)</option>
+            </select>
+          </td>
+      <tr>
+        <td>
+        <label class = "sr-only" for= "injury">Injury?</label>
+        <select class= "form-control" name = "injury" id="injury">
+          <option>Is the patient injured?</option>
+          <option value = "yes">Yes</option>
+          <option value = "no">No</option>
+        </select>
+        </td>
+        <td>
+          <label class = "sr-only" for= "rr">Respiratory Rate (br/min)</label>
+          <select class= "form-control" name = "rr" id="rr">
+            <option>Respiratory Rate (br/min)</option>
+            <option value = "norm">Normal (Below 22)</option>
+            <option value = "norm">High (Above 22)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label class = "sr-only" for= "pain">Pain Scale (1: low, 10: high)</label>
+          <select class= "form-control" name = "pain" id="pain">
+            <option> Is the patient in pain? (Pain Scale 1: low 10: high)</option>
+            <option value = "zero">No Pain</option>
+            <option value = "low">Low (3 or Less)</option>
+            <option value = "med">Medium (4-6)</option>
+            <option value = "high">High (7 or Greater)</option>
+          </select>
+        </td>
+        <td>
+          <label class = "sr-only" for= "bt">Body Temperature (C)</label>
+          <select class= "form-control" name = "bt" id="bt">
+            <option>Body Temperature (C)</option>
+            <option value = "norm">Normal (Below 37.5)</option>
+            <option value = "high">High (Above 37.5)</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+<div class ="pred">
+  <p class = 'pred'>
+    Prediction:
+    {{ pred }}
+    {% for p in prediction %}
+    <br>  {{p['name']}}:{{ 100*p['prob'] | round(2) }}%
+    {% endfor %}
+  </p>
+  </div>
+  </div>
+  {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
