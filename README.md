@@ -19,3 +19,5 @@ I published a blog detailing this project to Towards Data Science. It can be fou
 Counclusions:
 
 Logistic regression represents the best predictions keeping in mind simplicity and interpretability. An app was deployed to allow for real-time prediction [here](https://hospital-admissions-predictor.herokuapp.com/)
+
+- website: Scripts for building and deploying heroku app and pickled model are stored here
