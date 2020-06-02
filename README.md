@@ -2,7 +2,7 @@
 
 The objective of this project is to predict whether a patients will be admitted to the hospital or not based on vitals taken upon entering the ER. 
 
-**Dataset: **
+**Dataset:**
 
 - Data comes from a [Korean Triage Study](https://figshare.com/articles/Triage_accuracy_and_causes_of_mistriage_using_the_Korean_Triage_and_Acuity_Scale/9779267/1)
 
